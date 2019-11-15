@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<VisualStudioPropertySheet
+	ProjectType="Visual C++"
+	Version="8.00"
+	Name="CustomShellReloadAction"
+	>
+	<Tool
+		Name="VCLinkerTool"
+		AdditionalDependencies="msi.lib"
+		OutputFile="$(OutDir)\$(ProjectName).dll"
+		ModuleDefinitionFile="src\CustomShellReloadAction\CustomShellReloadAction.def"
+	/>
+</VisualStudioPropertySheet>

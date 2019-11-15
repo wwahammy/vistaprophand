@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<VisualStudioPropertySheet
+	ProjectType="Visual C++"
+	Version="8.00"
+	Name="Breakpad"
+	>
+	<Tool
+		Name="VCCLCompilerTool"
+		AdditionalIncludeDirectories=".\breakpad;.\breakpad\breakpad\client\windows\handler; .\breakpad\breakpad"
+		PreprocessorDefinitions="BREAKPAD_DLLEXPORT_PRO"
+	/>
+</VisualStudioPropertySheet>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<VisualStudioPropertySheet
+	ProjectType="Visual C++"
+	Version="8.00"
+	Name="XMPFiles"
+	>
+	<Tool
+		Name="VCCLCompilerTool"
+		AdditionalIncludeDirectories="./src/xmp/;./src/XMPFiles;./src/XMPFiles/FormatSupport;./src/xmpinclude;&quot;./src/xmp/third-party/qtdevwin/cincludes&quot;;&quot;.\src\xmp\third-party\MD5&quot;;&quot;.\src\xmp\third-party\zlib&quot;;./src/xmp/common"
+		PreprocessorDefinitions="WIN32=1;_WINDOWS=1;WIN_ENV=1;XMP_StaticBuild=1;XMP_PRESERVE_BIB_CLIENT=0;HAVE_VSNPRINTF;"
+		DefaultCharIsUnsigned="true"
+	/>
+	<Tool
+		Name="VCLibrarianTool"
+		AdditionalDependencies="Uuid.lib Advapi32.lib User32.lib src\xmp\third-party\QTDevWin\Libraries\qtmlClient.lib"
+		AdditionalLibraryDirectories="&quot;./$(ConfigurationName)/&quot;"
+	/>
+	<Tool
+		Name="VCLinkerTool"
+		AdditionalDependencies="shlwapi.lib shell32.lib crypt32.lib propsys.lib msxml6.lib ole32.lib comsupp.lib QTMLClient.lib XMP.lib"
+		OutputFile=""
+		AdditionalLibraryDirectories="&quot;./src/xmp/third-party/qtdevwin/libraries/&quot;;&quot;./$(ConfigurationName)/&quot;"
+		IgnoreDefaultLibraryNames="LIBCMT"
+	/>
+</VisualStudioPropertySheet>

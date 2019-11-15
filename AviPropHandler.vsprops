@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<VisualStudioPropertySheet
+	ProjectType="Visual C++"
+	Version="8.00"
+	Name="AviPropHandler"
+	>
+	<Tool
+		Name="VCCLCompilerTool"
+		AdditionalIncludeDirectories="./src/xmpinclude;./src/aviprophandler/aviprophandler/"
+		PreprocessorDefinitions="WIN32=1;_WINDOWS=1;WIN_ENV=1;XMP_ClientBuild=0;HAVE_EXPAT_CONFIG_H=1;XMP_IMPORT=1;"
+	/>
+	<Tool
+		Name="VCLinkerTool"
+		AdditionalDependencies="shlwapi.lib shell32.lib crypt32.lib propsys.lib ole32.lib comsupp.lib XMPCore.lib XMPFiles.lib"
+		AdditionalLibraryDirectories="&quot;./$(ConfigurationName)/&quot;"
+		IgnoreDefaultLibraryNames=""
+		ModuleDefinitionFile=".\src\PropHandler\PropHandler\EinsteinVaMP.def"
+	/>
+</VisualStudioPropertySheet>

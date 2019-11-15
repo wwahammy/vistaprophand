@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+		<Product Id="d97b2aa1-a377-426e-9edd-7edf04b52e10" Name="Vista Metadata Project" Language="1033" Version="1.0.0.0" Manufacturer="Vista Metadata Project" UpgradeCode="9bb0a1e9-44f6-44fa-922d-03d9c5b398e1">
+		<Package InstallerVersion="400" Compressed="yes" />
+
+		<Media Id="1" Cabinet="$safeprojectname$.cab" EmbedCab="yes" />
+
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="INSTALLLOCATION" Name="VMP">
+
+					<Component Id="ProductComponent" Guid="e6d5988a-c95b-4224-97cf-86b476e1332b">
+						<!-- TODO: Insert your files, registry keys, and other resources here. -->
+					</Component>
+
+				</Directory>
+			</Directory>
+		</Directory>
+
+		<Feature Id="ProductFeature" Title="Vista Matadata Project" Level="1" Description="The whole shebang.">
+			<ComponentRef Id="ProductComponent" />
+		</Feature>
+	</Product>
+</Wix>

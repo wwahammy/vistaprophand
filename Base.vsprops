@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<VisualStudioPropertySheet
+	ProjectType="Visual C++"
+	Version="8.00"
+	Name="Base"
+	OutputDirectory=".\$(ConfigurationName)\"
+	IntermediateDirectory=".\int\$(ProjectName)\$(ConfigurationName)\"
+	>
+	<Tool
+		Name="VCCLCompilerTool"
+		AdditionalIncludeDirectories=""
+		EnableEnhancedInstructionSet="2"
+		ObjectFile="$(IntDir)"
+		ProgramDataBaseFileName="$(IntDir)vc80.pdb"
+		XMLDocumentationFileName="$(IntDir)"
+		DisableSpecificWarnings="4996;"
+	/>
+	<Tool
+		Name="VCLinkerTool"
+		OutputFile="$(OutDir)$(ProjectName).dll"
+		ProgramDatabaseFile="$(OutDir)$(ProjectName).pdb"
+		ImportLibrary="$(OutDir)$(ProjectName).lib"
+	/>
+</VisualStudioPropertySheet>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<VisualStudioPropertySheet
+	ProjectType="Visual C++"
+	Version="8.00"
+	Name="AviThumbnailProvider"
+	>
+	<Tool
+		Name="VCCLCompilerTool"
+		AdditionalIncludeDirectories=".\src\cximage; &quot;c:\program files\microsoft sdks\windows\v6.1\include&quot;"
+	/>
+	<Tool
+		Name="VCLinkerTool"
+		AdditionalDependencies="shlwapi.lib crypt32.lib strmiids.lib ole32.lib comsupp.lib gdiplus.lib"
+		ModuleDefinitionFile=".\src\thumbnailprovider\avithumbnailprovider.def"
+	/>
+</VisualStudioPropertySheet>

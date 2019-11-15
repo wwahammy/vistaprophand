@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://schemas.microsoft.com/windows/2006/propertydescription"
+        schemaVersion="1.0">
+  <propertyDescriptionList publisher="Vista Metadata Project" product="PropHandler">
+    <propertyDescription name="CreativeCommons.License" formatID="44872C2F-7741-48a6-B5D3-FFE53DCF87E3" propID="24">
+      <description>Indicates the license that the media is covered by.</description>
+      <searchInfo isColumn="true"/>
+      <typeInfo type="String" multipleValues="false" isViewable="true" isQueryable="true"/>
+      <labelInfo label="CC License" invitationText="Specify CC license" />
+      <displayInfo displayType="Enumerated" >
+        <editControl control="DropList"/>
+        <enumeratedList>
+          <enum value="http://creativecommons.org/licenses/by-nc-nd/3.0/" text="Creative Commons Attribution Non-commercial No Derivatives"/>
+          <enum value="http://creativecommons.org/licenses/by-nc-sa/3.0/" text="Creative Commons Attribution Non-commercial Share Alike" />
+          <enum value="http://creativecommons.org/licenses/by-nc/3.0/" text="Creative Commons Attribution Non-commercial" />
+          <enum value="http://creativecommons.org/licenses/by-nd/3.0/" text="Creative Commons Attribution No Derivatives"/>
+          <enum value="http://creativecommons.org/licenses/by-sa/3.0/" text="Creative Commons Attribution Share Alike" />
+          <enum value="http://creativecommons.org/licenses/by/3.0/" text="Creative Commons Attribution" />
+          <enum value="http://creativecommons.org/licenses/GPL/2.0/" text="GNU General Public License" />
+          <enum value="http://creativecommons.org/licenses/LGPL/2.1/" text="GNU Lesser General Public License" /> 
+        </enumeratedList>
+      </displayInfo>
+    </propertyDescription>
+  </propertyDescriptionList>
+</schema>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<VisualStudioPropertySheet
+	ProjectType="Visual C++"
+	Version="8.00"
+	Name="ErrorReporting"
+	>
+	<Tool
+		Name="VCCLCompilerTool"
+		AdditionalIncludeDirectories="./;./breakpad;.\breakpad\breakpad"
+	/>
+	<Tool
+		Name="VCLinkerTool"
+		AdditionalDependencies="BreakPad.lib"
+		AdditionalLibraryDirectories="&quot;./$(ConfigurationName)/&quot;;.\breakpad\external\src\client\windows\Debug"
+	/>
+</VisualStudioPropertySheet>

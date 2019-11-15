@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:NetFx="http://schemas.microsoft.com/wix/NetFxExtension">
+  
+  <?include version.wxi ?>
+		<Product Id="7F83CD25-75E2-43cc-A3C4-1C36CA5AEFB6" 
+             Name="Vista Metadata Project" Language="1033" 
+             Version="$(var.VMPVersion)" Manufacturer="Vista Metadata Project" 
+             UpgradeCode="9BB0A1E9-44F6-44FA-922D-03D9C5B398E1">
+
+      <Package InstallerVersion="400" Compressed="yes"/>
+      <WixVariable Id="WixUILicenseRtf" Value=".\License.rtf" />
+      <Upgrade Id="9BB0A1E9-44F6-44FA-922D-03D9C5B398E1">
+        <UpgradeVersion Minimum="0.0.0.0" Maximum="$(var.VMPVersion)" Property="UPGRADEVER1"/>
+      </Upgrade>
+     <!-- 
+        Each file is in a separate cab to speed up compilation
+        For some dumb reason, the cab library isn't multithreaded. 
+     -->
+    <Media Id="1" Cabinet="CrashReporter.cab" EmbedCab="yes" />
+    <Media Id="2" Cabinet="SharpZipLib.cab" EmbedCab="yes" />
+    <Media Id="3" Cabinet="einsteinvamp.cab" EmbedCab="yes"/>
+    <Media Id="4" Cabinet="XMPCore.cab" EmbedCab="yes" />
+      <Media Id="5" Cabinet="XMPFiles.cab" EmbedCab="yes" />
+      <Media Id="8" Cabinet="breakpad.cab" EmbedCab="yes"/>
+    <?define ThumbnailProviderCLSID={99A45086-08F6-4f69-BDB3-7D1952D3236C}?>
+    <?define IThumbnailBHID={7b2e650a-8e20-4f4a-b09e-6597afc72fb0}?>
+    <?define IThumbnailProviderCLSID={E357FCCD-A995-4576-B01F-234630154E96}?>
+    <?define IExtractImageCLSID={BB2E617C-0920-11D1-9A0B-00C04FC2D6C1}?>
+    <?define IExtractImage2CLSID={953BB1EE-93B4-11d1-98A3-00C04FB687DA}?>
+    <?define PropHandlerCLSID={5A07F0A8-60E4-474b-89CF-8705E4260D22}?>
+    <?define ApprovedShellExKey=Software\Microsoft\Windows\CurrentVersion\Shell Extensions\Approved?>
+    <?define PropHandlerKey=Software\Microsoft\Windows\CurrentVersion\PropertySystem\PropertyHandlers?>
+    <?define PreviewDetails=prop:*System.Title;*System.Media.Duration;*System.Size;*System.Video.FrameWidth;*System.Video.FrameHeight;System.Rating;System.Keywords;*System.Comment;System.Music.Artist;*System.Music.Genre;*System.ParentalRating;*System.OfflineAvailability;*System.OfflineStatus;*System.DateModified;*System.DateCreated;*System.SharedWith;*System.Media.SubTitle;*System.Media.Year;*System.Video.FrameRate;*System.Video.EncodingBitrate;*System.Video.TotalBitrate?>
+    <?define InfoTip=prop:System.ItemType;System.Size;System.Media.Duration;System.OfflineAvailability?>  
+    <?define FullDetails=prop:System.PropGroup.Description;System.Title;System.Media.SubTitle;System.Rating;System.Keywords;System.Comment;System.PropGroup.Video;System.Media.Duration;System.Video.FrameWidth;System.Video.FrameHeight;System.Video.EncodingBitrate;System.Video.TotalBitrate;System.Video.FrameRate;System.PropGroup.Audio;System.Audio.EncodingBitrate;System.Audio.ChannelCount;System.Audio.SampleRate;System.PropGroup.Media;System.Music.Artist;System.Media.Year;System.Music.Genre;System.PropGroup.Origin;System.Video.Director;System.Media.Producer;System.Media.Writer;System.Media.Publisher;System.Media.ContentDistributor;System.Media.DateEncoded;System.Media.EncodedBy;System.Media.AuthorUrl;System.Media.PromotionUrl;System.Copyright;System.PropGroup.Content;System.ParentalRating;System.ParentalRatingReason;System.Music.Composer;System.Music.Conductor;System.Music.Period;System.Music.Mood;System.Music.PartOfSet;System.Music.InitialKey;System.Music.BeatsPerMinute;System.DRM.IsProtected;System.PropGroup.FileSystem;System.ItemNameDisplay;System.ItemType;System.ItemFolderPathDisplay;System.Size;System.DateCreated;System.DateModified;System.FileAttributes;System.OfflineAvailability;System.OfflineStatus;System.SharedWith;System.FileOwner;System.ComputerName?>  
+    <?define ExtendedTileInfo=prop:System.ItemType;System.Size;System.Media.Duration;System.OfflineAvailability?>
+      
+        <Directory Id="TARGETDIR" Name="SourceDir">
+          <Directory Id="LocalAppDataFolder" Name="AppData">
+            <Directory Id="AppDataDirectory" Name="VMP">
+              <Component Id="AppDataComponent" Guid="B0A39ED3-24B0-4d81-B500-C9E894D26B18" DiskId="1">
+                <CreateFolder />
+                <RemoveFolder On="uninstall" Id="RemoveAppData"/>
+                <RegistryKey Root="HKCU" Key="Software\VMP" Action="createAndRemoveOnUninstall">
+                  <RegistryValue Name="Version" Value="$(var.VMPVersion)" Type="string" KeyPath="yes"/>
+                </RegistryKey>
+                
+              </Component>
+              <Directory Id="CrashReportDirectory" Name="CrashReports">
+                <Component Id="CrashReportsComponent" Guid="423AA79D-EEEF-4b3b-A5E1-9158C3A3F6FE">
+                  <CreateFolder/>
+                  <RemoveFolder On="uninstall" Id="CrashReports"/>
+                  <RegistryKey Root="HKCU" Key="Software\VMP\CrashReports" Action="createAndRemoveOnUninstall">
+                    <RegistryValue Name="Version" Value="$(var.VMPVersion)" Type="string" KeyPath="yes"/>
+                  </RegistryKey>
+                </Component>
+              </Directory>
+            </Directory>
+          </Directory>
+          
+          <Directory Id="SystemFolder" Name="SysFolder">
+            <Component Id="CrashReporterComponent" Guid="D52C99C7-5ECE-41b8-B822-E43768218074">
+              <File Id="CrashReporter" Name="VistaMetadataProjectCrashReporter.exe" Checksum="yes" Vital="yes"
+                  Source="./$(var.BuildType)/CrashReporter.exe" KeyPath="yes" DiskId="1">
+                <NetFx:NativeImage Id="crashNI" Platform="32bit" Priority="0"/>
+              </File>
+              
+            </Component>
+          </Directory>
+          <Directory Id="ProgramFilesFolder">
+            <Directory Id="INSTALLLOCATION" Name="VaMP">
+              
+              <Component Id="ZipLibComponent" Guid="0EE54472-0F9D-439f-821E-AF75F848EAB8">
+                <!-- Begin ZipLib -->
+                 
+                <File Id="ZipLib" Name="ICSharpCode.SharpZipLib.dll" Checksum="yes" Vital="yes"  KeyPath="yes"
+                      Assembly=".net"  Source="./$(var.BuildType)/ICSharpCode.SharpZipLib.dll" DiskId="2">
+                  <NetFx:NativeImage Id="zipNI" Platform="32bit" Priority="0"/>
+                </File>
+                <!-- End ZipLib -->
+              </Component>
+              <Component Id="ProductComponent" Guid="e6d5988a-c95b-4224-97cf-86b476e1332b">
+                
+
+                <!-- Begin Files -->
+                <!-- Begin Prop Handler -->
+                <File Id="FileAviPropHand1" Name="EinsteinVaMP.dll" Checksum="yes" Vital="yes" 
+                      Source="./$(var.BuildType)/EinsteinVaMP.dll" DiskId="3"/>
+                <File Id="FileAviPropHand2" Name="XMPCore.lib" Checksum="yes" Vital="yes" 
+                      Source="./$(var.BuildType)/XMPCore.lib" DiskId="4"/>
+                <File Id="FileAviPropHand3" Name="XMPFiles.lib" Checksum="yes" Vital="yes"
+                      Source="./$(var.BuildType)/XMPFiles.lib" DiskId="5"/>
+
+                <!-- Begin BreakPad -->
+                
+                <File Id="FileBreakPad1" Name="breakpad.dll" Checksum="yes" Vital="yes" 
+                      Source="./$(var.BuildType)/breakpad.dll" DiskId="8"/>
+               
+                <!-- End Breakpad -->
+                
+                  
+                <!-- End Files -->
+
+            
+                <!-- Begin Registry -->
+                <!-- Begin Prop Handler -->
+                
+                <RegistryKey Id="PropRegClsId10" Root="HKCR" Key="CLSID\$(var.PropHandlerCLSID)"
+                             Action="createAndRemoveOnUninstall" />
+                <RegistryValue Id="ProRegClsId1" Root="HKCR"
+                               Key="CLSID\$(var.PropHandlerCLSID)" Action="write"
+                               Type="string" Value="Avi Property Handler" />
+
+                <RegistryValue Id="PropRegClsId2" Root="HKCR"
+                          Key="CLSID\$(var.PropHandlerCLSID)" Action="write"
+                          Type="integer" Name="ManualSafeSave" Value="1" />
+                <RegistryValue Id="PropRegClsId80" Root="HKCR"
+                          Key="CLSID\$(var.PropHandlerCLSID)" Action="write"
+                          Type="integer" Name="DisableProcessIsolation" Value="1" />
+                <RegistryValue Id="PropRegClsId3" Root="HKCR"
+                          Key="CLSID\$(var.PropHandlerCLSID)\InProcServer32"
+                          Action="write" Type="string"
+                          Value="$(env.PROGRAMFILES)\VaMP\EinsteinVaMP.dll" />
+                <RegistryValue Id="PropRegClsId4" Root="HKCR"
+                          Key="CLSID\$(var.PropHandlerCLSID)\InProcServer32" Action="write"
+                          Type="string" Name="ThreadingModel" Value="Apartment" />
+                
+                <RegistryValue Id="PropRegPropHand1" Root="HKLM"
+                          Key="$(var.PropHandlerKey)\.avi"
+                          Type="string" Action="write"  Value="$(var.PropHandlerCLSID)" />
+                
+                
+                
+                <RegistryValue Id="PropRegSysAssoc1" Root="HKCR"
+                          Key="SystemFileAssociations\.avi" Name="PreviewDetails"
+                          Type="string"  Action="write"
+                          Value="$(var.PreviewDetails)"/>
+                <RegistryValue Id="PropRegSysAssoc2" Root="HKCR"
+                          Key="SystemFileAssociations\.avi" Name="InfoTip"
+                          Type="string"  Action="write"
+                          Value="$(var.InfoTip)" />
+                <RegistryValue Id="PropRegSysAssoc3" Root="HKCR"
+                          Key="SystemFileAssociations\.avi" Name="FullDetails"
+                          Type="string"  Action="write"
+                          Value="$(var.FullDetails)" />
+                <RegistryValue Id="PropRegSysAssoc4" Root="HKCR"
+                          Key="SystemFileAssociations\.avi" Name="ExtendedTileInfo"
+                          Type="string"  Action="write"
+                          Value="$(var.ExtendedTileInfo)" />
+                
+                <RegistryValue Id="PropRegApprovShellEx1" Root="HKLM"
+                          Key="$(var.ApprovedShellExKey)" Action="write" Type="string"
+                          Name="$(var.PropHandlerCLSID)" Value="AVI Property Handler" />
+                <!--<RemoveRegistryKey Id="PropRegAvi1" Root="HKCR"
+                                   Key=".avi\PersistentHandler"
+                                   Action="removeOnInstall"/>-->
+                
+                <!-- End Prop Handler -->
+                <!-- End Registry -->
+
+                
+              </Component>
+
+            </Directory>
+          </Directory>
+        </Directory>
+     
+		<Feature Id="ProductFeature" Title="Vista Metadata Project" Level="1" Description="The whole shebang.">
+      <ComponentRef Id="AppDataComponent" />
+      <ComponentRef Id="ZipLibComponent" />
+      <ComponentRef Id="CrashReporterComponent"/>
+      <ComponentRef Id="CrashReportsComponent"/>
+      <ComponentRef Id="ProductComponent" />
+		</Feature>
+      <!--
+        <Property Id='ARPCOMMENTS'>any comments</Property>
+        <Property Id='ARPCONTACT'></Property>
+        <Property Id='ARPHELPLINK'>URL for technical support</Property>
+        <Property Id='ARPURLINFOABOUT'>URL for general info about the product</Property>
+        <Property Id='ARPURLUPDATEINFO'>URL for product updates</Property>
+        <Property Id='ARPHELPTELEPHONE'>URL for technical support</Property>
+        <Property Id='ARPREADME'>path</Property> -->
+        <!--<Property Id='ARPSIZE'>2567</Property>-->
+<!--        <Property Id='ARPNOMODIFY'>1</Property>-->
+     
+      <UIRef Id="WixUI_Minimal"/>
+      <!--<CustomAction Id="ShellReloader" Execute="deferred" DllEntry="ShellReload" BinaryKey="ShellReload" 
+                     Impersonate="no"/>-->
+      
+      <InstallExecuteSequence>
+        <InstallExecute Before="RemoveExistingProducts"/>
+        <RemoveExistingProducts Before="InstallFinalize" />        
+        <!--<Custom Action="ShellReloader" Before="InstallFinalize"/>-->
+      </InstallExecuteSequence>
+      <!--<Binary SourceFile="$(var.BuildType)\CustomShellReloadAction.dll" Id="ShellReload" />-->
+      
+    </Product>
+</Wix>
