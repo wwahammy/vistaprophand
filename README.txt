@@ -1,6 +1,4 @@
-If you really like this project, please get involved! Any help would be appreciated. Email me at hammy@charter.net
-
-Also you can support this work with a small donation via the project page. I am a college student so anything would be helpful. Either way, enjoy!!!		
+This project is abandoned has not been used or supported for quite some time. Enjoy if it helps you though!
 
 ------------------------------------------------------------------------
 
@@ -43,13 +41,6 @@ It can be found at http://www.microsoft.com/downloads/details.aspx?FamilyID=7796
 
 1. Uninstall from the control panel like you would any program.
 
-IMPORTANT NOTE: This should reinstall the Windows built-in AVI property handler and thumbnail handlers and their registry settings but sometimes it doesn't. I don't know why but if you uninstall and things don't work like before, just tell me and I'll help you fix it.
-
-
--------------------------
-
-If you have any problems PLEASE email me at hammy@charter.net. Also if you want to get involved, have suggestions, bug reports, or maybe even thank me, please email me. 
-
-I plan on updating often so check the news on the project page for new releases and information.
+IMPORTANT NOTE: This should reinstall the Windows built-in AVI property handler and thumbnail handlers and their registry settings but sometimes it doesn't. I don't know why.
 
 
